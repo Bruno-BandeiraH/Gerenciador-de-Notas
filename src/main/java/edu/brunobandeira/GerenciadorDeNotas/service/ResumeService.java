@@ -1,5 +1,6 @@
 package edu.brunobandeira.GerenciadorDeNotas.service;
 
+import edu.brunobandeira.GerenciadorDeNotas.dto.ResumeRequest;
 import edu.brunobandeira.GerenciadorDeNotas.model.Resume;
 import edu.brunobandeira.GerenciadorDeNotas.repository.ResumeRepository;
 import org.springframework.stereotype.Service;
@@ -37,13 +38,13 @@ public class ResumeService {
         return resumeRepository.findByTitleContainingIgnoreCase(keyword);
     }
 
-    public Resume updateResume(Long id, Resume updatedResume) {
+    public Resume updateResume(Long id, ResumeRequest request) {
         Resume resume = resumeRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Resume not found."));
 
-        resume.setTitle(updatedResume.getTitle());
-        resume.setContent(updatedResume.getContent());
-        resume.setTags(updatedResume.getTags());
+        resume.setTitle(request.getTitle());
+        resume.setContent(request.getContent());
+        resume.setTags(request.getTags());
         return resumeRepository.save(resume);
     }
 

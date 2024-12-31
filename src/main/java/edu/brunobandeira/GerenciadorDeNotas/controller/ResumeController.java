@@ -1,5 +1,6 @@
 package edu.brunobandeira.GerenciadorDeNotas.controller;
 
+import edu.brunobandeira.GerenciadorDeNotas.dto.ResumeRequest;
 import edu.brunobandeira.GerenciadorDeNotas.model.Resume;
 import edu.brunobandeira.GerenciadorDeNotas.service.ResumeService;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +11,7 @@ import java.util.List;
 @RequestMapping("/resumes")
 public class ResumeController {
 
-    private ResumeService resumeService;
+    private final ResumeService resumeService;
 
     public ResumeController(ResumeService resumeService) {
         this.resumeService = resumeService;
@@ -19,7 +20,14 @@ public class ResumeController {
     // REQUESTS
 
     @PostMapping
-    public Resume create(Resume resume) {
+    public Resume create(ResumeRequest request) {
+        Resume resume = new Resume(
+            null,
+            request.getTitle(),
+            request.getContent(),
+            null,
+            request.getTags()
+        );
         return resumeService.createResume(resume);
     }
 
@@ -45,8 +53,8 @@ public class ResumeController {
     }
 
     @PutMapping("/{id}")
-    public Resume update(@PathVariable Long id, @RequestBody Resume resume) {
-        return resumeService.updateResume(id, resume);
+    public Resume update(@PathVariable Long id, @RequestBody ResumeRequest request) {
+        return resumeService.updateResume(id, request);
     }
 
     @DeleteMapping("/{id}")
