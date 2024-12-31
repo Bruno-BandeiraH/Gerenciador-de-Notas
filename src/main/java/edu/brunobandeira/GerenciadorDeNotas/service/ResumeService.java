@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Service
 public class ResumeService {
-    private ResumeRepository resumeRepository;
+    private final ResumeRepository resumeRepository;
 
     public ResumeService(ResumeRepository resumeRepository) {
         this.resumeRepository = resumeRepository;
