@@ -3,6 +3,7 @@ package edu.brunobandeira.GerenciadorDeNotas.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity
@@ -67,5 +68,10 @@ public class Resume {
     }
 
     public Resume() {
+    }
+
+    public String dataFormatter() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return this.madeIn.format(formatter);
     }
 }
