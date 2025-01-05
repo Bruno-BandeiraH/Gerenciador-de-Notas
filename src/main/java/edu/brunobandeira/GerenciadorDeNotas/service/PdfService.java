@@ -20,7 +20,7 @@ public class PdfService {
         this.resumeService = resumeService;
     }
 
-    public ResponseEntity<byte[]> exportPdf(Long id) {
+    public ResponseEntity<byte[]> exportResume(Long id) {
         try {
             Resume resume = resumeService.findById(id).orElseThrow(() -> new RuntimeException("Resume not found."));
             ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -30,16 +30,22 @@ public class PdfService {
 
             Font font = new Font(Font.HELVETICA, 18, Font.BOLD);
 
-            Paragraph header = new Paragraph();
-            header.setAlignment(Element.ALIGN_CENTER);
-            header.add(new Chunk(resume.getTitle(), font));
-            header.add(new Paragraph(" "));
-            header.setAlignment(Element.ALIGN_RIGHT);
-            header.add(new Chunk(resume.dataFormatter()));
-            header.add(new Paragraph(" "));
-            document.add(header);
+            Paragraph title = new Paragraph();
+            title.setAlignment(Element.ALIGN_CENTER);
+            title.add(new Chunk(resume.getTitle(), font));
+            title.add(new Paragraph(" "));
+            title.add(new Paragraph(" "));
+            document.add(title);
 
-            font.setSize(14);
+            Paragraph time = new Paragraph();
+            time.setAlignment(Element.ALIGN_LEFT);
+            font.setSize(10);
+            time.add(new Chunk(resume.dataFormatter(), font));
+            time.add(new Paragraph(" "));
+            time.add(new Paragraph(" "));
+            document.add(time);
+
+            font.setSize(12);
             font.setStyle(Font.NORMAL);
             document.add(new Paragraph(resume.getContent(), font));
 

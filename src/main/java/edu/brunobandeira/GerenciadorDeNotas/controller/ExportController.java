@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/export")
+@RequestMapping("/exports")
 @ApiResponse(responseCode = "200", description = "Exporta PDF", content = @Content(mediaType = "application/pdf"))
 public class ExportController {
 
@@ -24,7 +24,7 @@ public class ExportController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<byte[]> exportPdf(@PathVariable Long id) {
-        return pdfService.exportPdf(id);
+    public ResponseEntity<byte[]> exportResume(@PathVariable Long id) {
+        return pdfService.exportResume(id);
     }
 }
