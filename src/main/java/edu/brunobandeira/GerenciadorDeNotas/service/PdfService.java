@@ -24,9 +24,9 @@ public class PdfService {
             PdfWriter.getInstance(document, output);
             document.open();
 
-            Font headerFont = new Font(Font.HELVETICA, 18, Font.BOLD);
-            Font dateTimeFont = new Font(Font.HELVETICA, 10, Font.BOLD);
-            Font contentFont = new Font(Font.HELVETICA, 12, Font.NORMAL);
+            Font headerFont = createFont(18, Font.BOLD);
+            Font dateTimeFont = createFont(10, Font.BOLD);
+            Font contentFont = createFont(12, Font.NORMAL);
 
             // Header title
             Paragraph title = new Paragraph();
@@ -60,10 +60,10 @@ public class PdfService {
         PdfWriter.getInstance(document, output);
         document.open();
 
-        Font headerFont = new Font(Font.HELVETICA, 22, Font.BOLD);
-        Font titleFont = new Font(Font.HELVETICA, 14, Font.BOLD);
-        Font dateTimeFont = new Font(Font.HELVETICA, 10, Font.BOLD);
-        Font contentFont = new Font(Font.HELVETICA, 12, Font.NORMAL);
+        Font headerFont = createFont(22, Font.BOLD);
+        Font titleFont = createFont(14, Font.BOLD);
+        Font dateTimeFont = createFont(10, Font.BOLD);
+        Font contentFont = createFont(12, Font.NORMAL);
 
         // Header title
         Paragraph header = new Paragraph();
@@ -91,5 +91,9 @@ public class PdfService {
 
         document.close();
         return output.toByteArray();
+    }
+
+    private Font createFont(int size, int style) {
+        return new Font(Font.HELVETICA, size, style);
     }
 }
