@@ -1,8 +1,11 @@
 package edu.brunobandeira.GerenciadorDeNotas.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.List;
 
 public class ResumeRequest {
+    @NotBlank(message = "Title is mandatory")
     private String title;
     private String content;
     private List<String> tags;

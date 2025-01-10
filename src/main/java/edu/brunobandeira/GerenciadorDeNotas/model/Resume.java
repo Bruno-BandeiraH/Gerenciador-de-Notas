@@ -12,10 +12,10 @@ public class Resume {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT") // enables long texts, like descriptions, articles
     private String content;
     private LocalDateTime madeIn;
-    @ElementCollection
+    @ElementCollection // persists the collection in a separated table. Serves for simple collections, not entities
     private List<String> tags;
 
 
